@@ -6,8 +6,8 @@
 
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 // Windows Header Files:
-#include <windows.h>
-#include <windowsx.h>
+// #include <windows.h>
+// #include <windowsx.h>
 
 // C RunTime Header Files
 #include <malloc.h>
@@ -17,46 +17,47 @@
 #include <fstream>
 
 #include "vulkan/vulkan.h"
+#include <X11/X.h>
 
 // we are using DirectXMath
-#include <DirectXMath.h>
-using namespace DirectX;
+#include <glm/glm.hpp>
+using namespace glm;
 
 // TODO: reference additional headers your program requires here
-#include "Base\Imgui.h"
-#include "Base\ImguiHelper.h"
-#include "Base\Device.h"
-#include "Base\Helper.h"
-#include "Base\Texture.h"
-#include "Base\SwapChain.h"
-#include "Base\UploadHeap.h"
-#include "Base\GPUTimeStamps.h"
-#include "Base\DebugMarkersExt.h"
-#include "Base\CommandListRing.h"
-#include "Base\StaticBufferPool.h"
-#include "Base\DynamicBufferRing.h"
-#include "Base\ResourceViewHeaps.h"
-#include "Base\ShaderCompilerHelper.h"
+#include "base/Imgui.h"
+#include "base/ImGuiHelper.h"
+#include "base/Device.h"
+#include "base/Helper.h"
+#include "base/Texture.h"
+#include "base/SwapChain.h"
+#include "base/UploadHeap.h"
+#include "base/GPUTimestamps.h"
+#include "base/DebugMarkersExt.h"
+#include "base/CommandListRing.h"
+#include "base/StaticBufferPool.h"
+#include "base/DynamicBufferRing.h"
+#include "base/ResourceViewHeaps.h"
+#include "base/ShaderCompilerHelper.h"
 
-#include "Misc\Misc.h"
-#include "Misc\Camera.h"
-#include "Misc\FrameworkWindows.h"
+#include "Misc/Misc.h"
+#include "Misc/Camera.h"
+#include "Misc/FrameworkWindows.h"
 
-#include "PostProc\Bloom.h"
-#include "PostProc\BlurPS.h"
-#include "PostProc\SkyDome.h"
-#include "PostProc\ToneMapping.h"
-#include "PostProc\SkyDomeProc.h"
-#include "PostProc\DownSamplePS.h"
+#include "PostProc/Bloom.h"
+#include "PostProc/BlurPS.h"
+#include "PostProc/SkyDome.h"
+#include "PostProc/Tonemapping.h"
+#include "PostProc/SkyDomeProc.h"
+#include "PostProc/DownSamplePS.h"
 
-#include "GLTF\GltfPbrPass.h"
-#include "GLTF\GltfBBoxPass.h"
-#include "GLTF\GltfDepthPass.h"
+#include "GLTF/GltfPbrPass.h"
+#include "GLTF/GltfBBoxPass.h"
+#include "GLTF/GltfDepthPass.h"
 
-#include "Widgets\Axis.h"
-#include "Widgets\CheckerBoardFloor.h"
-#include "Widgets\WireframeBox.h"
-#include "Widgets\WireframeSphere.h"
+#include "widgets/Axis.h"
+#include "widgets/CheckerboardFloor.h"
+#include "widgets/WireframeBox.h"
+#include "widgets/WireframeSphere.h"
 
 
 using namespace CAULDRON_VK;

@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.4)
+
+if(MSVC)
 set(CMAKE_GENERATOR_PLATFORM x64)
+endif()
+
 
 project (GLTFSample_${GFX_API})
 
@@ -15,8 +19,8 @@ add_subdirectory(libs/cauldron)
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
 
-if(GFX_API STREQUAL DX12)        
-    add_subdirectory(src/DX12)   
+if(GFX_API STREQUAL DX12)
+    add_subdirectory(src/DX12)
 elseif(GFX_API STREQUAL VK)
     find_package(Vulkan REQUIRED)
     add_subdirectory(src/VK)
@@ -34,4 +38,3 @@ else()
     message(STATUS "----------------------------------------------------------------------------------------")
     message(FATAL_ERROR "")
 endif()
-

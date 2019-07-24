@@ -1,5 +1,5 @@
 // AMD SampleVK sample code
-// 
+//
 // Copyright(c) 2018 Advanced Micro Devices, Inc.All rights reserved.
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files(the "Software"), to deal
@@ -38,14 +38,14 @@
 class GLTFSample : public FrameworkWindows
 {
 public:
-    GLTFSample(LPCSTR name);
-    void OnCreate(HWND hWnd);
+    GLTFSample(const char *name);
+    void OnCreate(XID hWnd);
     void OnDestroy();
     void OnRender();
     bool OnEvent(MSG msg);
     void OnResize(uint32_t Width, uint32_t Height);
     void SetFullScreen(bool fullscreen);
-    
+
 private:
     Device m_device;
     SwapChain             m_swapChain;

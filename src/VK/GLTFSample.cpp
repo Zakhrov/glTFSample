@@ -1,5 +1,5 @@
 // AMD SampleVK sample code
-// 
+//
 // Copyright(c) 2018 Advanced Micro Devices, Inc.All rights reserved.
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files(the "Software"), to deal
@@ -23,7 +23,7 @@
 
 const bool VALIDATION_ENABLED = false;
 
-GLTFSample::GLTFSample(LPCSTR name) : FrameworkWindows(name)
+GLTFSample::GLTFSample(const char *name) : FrameworkWindows(name)
 {
     m_lastFrameTime = MillisecondsNow();
     m_time = 0;
@@ -37,14 +37,14 @@ GLTFSample::GLTFSample(LPCSTR name) : FrameworkWindows(name)
 // OnCreate
 //
 //--------------------------------------------------------------------------------------
-void GLTFSample::OnCreate(HWND hWnd)
+void GLTFSample::OnCreate(XID hWnd)
 {
-    DWORD dwAttrib = GetFileAttributes("..\\..\\cauldron-media\\");
-    if ( (dwAttrib == INVALID_FILE_ATTRIBUTES) || ( (dwAttrib & FILE_ATTRIBUTE_DIRECTORY))==0)
-    {
-        MessageBox(NULL, "Media files not found!\n\nPlease check the readme on how to get the media files.", "Cauldron Panic!", MB_ICONERROR);
-        exit(0);
-    }
+    // DWORD dwAttrib = GetFileAttributes("..\\..\\cauldron-media\\");
+    // if ( (dwAttrib == INVALID_FILE_ATTRIBUTES) || ( (dwAttrib & FILE_ATTRIBUTE_DIRECTORY))==0)
+    // {
+    //     MessageBox(NULL, "Media files not found!\n\nPlease check the readme on how to get the media files.", "Cauldron Panic!", MB_ICONERROR);
+    //     exit(0);
+    // }
 
     // Create Device
     //
@@ -114,8 +114,8 @@ void GLTFSample::OnDestroy()
 
     m_swapChain.OnDestroyWindowSizeDependentResources();
     m_swapChain.OnDestroy();
-    
-    //shut down the shader compiler 
+
+    //shut down the shader compiler
     DestroyShaderCache(&m_device);
 
     if (m_pGltfLoader)
@@ -178,8 +178,8 @@ void GLTFSample::OnResize(uint32_t width, uint32_t height)
 
         // if resizing but not minimizing the recreate it with the new size
         //
-        if (m_Width > 0 && m_Height > 0)  
-        {            
+        if (m_Width > 0 && m_Height > 0)
+        {
             m_swapChain.OnCreateWindowSizeDependentResources(m_Width, m_Height);
             m_Node->OnCreateWindowSizeDependentResources(&m_swapChain, m_Width, m_Height);
         }
@@ -315,13 +315,13 @@ void GLTFSample::OnRender()
             ImGui::SliderFloat("iblFactor", &m_state.iblFactor, 0.0f, 3.0f);
             ImGui::SliderFloat("spotLightIntensity 0", &m_state.spotlight[0].intensity, 0.0f, 50.0f);
         }
-        
+
         const char * tonemappers[] = { "Timothy", "DX11DSK", "Reinhard", "Uncharted2Tonemap", "ACES", "No tonemapper" };
         ImGui::Combo("tone mapper", &m_state.toneMapper, tonemappers, _countof(tonemappers));
-        
+
         const char * skyDomeType[] = { "Procedural Sky", "cubemap", "Simple clear" };
         ImGui::Combo("SkyDome", &m_state.skyDomeType, skyDomeType, _countof(skyDomeType));
-        
+
         const char * cameraControl[] = { "WASD", "Orbit" };
         static int cameraControlSelected = 1;
         ImGui::Combo("Camera", &cameraControlSelected, cameraControl, _countof(cameraControl));
@@ -372,7 +372,7 @@ void GLTFSample::OnRender()
             ofs.close();
             vmaFreeStatsString(m_device.GetAllocator(), pJson);
         }
-#endif        
+#endif
 
         ImGui::End();
 
@@ -398,7 +398,7 @@ void GLTFSample::OnRender()
             }
             else if (cameraControlSelected == 1)
             {
-                //  Orbiting                
+                //  Orbiting
                 //
                 m_distance -= (float)io.MouseWheel / 3.0f;
                 m_distance = std::max<float>(m_distance, 0.1f);
@@ -433,7 +433,7 @@ void GLTFSample::OnRender()
 
     m_state.time = m_time;
 
-    // Do Render frame using AFR 
+    // Do Render frame using AFR
     //
     m_Node->OnRender(&m_state, &m_swapChain);
 
@@ -458,4 +458,3 @@ int WINAPI WinMain(HINSTANCE hInstance,
     // create new Vulkan sample
     return RunFramework(hInstance, lpCmdLine, nCmdShow, Width, Height, new GLTFSample(Name));
 }
-
